@@ -8,5 +8,7 @@ public class Main {
         int randNum = random.nextInt();
         System.out.println(randNum);
 
+        System.out.println("new feature sout");
+
     }
 }
