@@ -10,6 +10,8 @@ public class Main {
 
         System.out.println("new feature sout");
 
+        System.out.println("the second sout feature");
+
         System.out.println("master sout");
 
     }
