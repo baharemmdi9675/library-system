@@ -1,18 +1,11 @@
-import java.util.Random;
+import repository.MemberRepository;
+
+import java.sql.SQLException;
 
 public class Main {
-    static void main(String[] args) {
-        System.out.println("test");
+    static void main(String[] args) throws SQLException {
 
-        Random random = new Random();
-        int randNum = random.nextInt();
-        System.out.println(randNum);
-
-        System.out.println("new feature sout");
-
-        System.out.println("the second sout feature");
-
-        System.out.println("master sout");
-
+        MemberRepository mr = new MemberRepository();
+        System.out.println(mr.findById(3L));
     }
 }
