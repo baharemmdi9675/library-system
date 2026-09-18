@@ -10,9 +10,9 @@ public class MemberRepository {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
-            String sql = "Insert INTO member (name) VALUES (?)";
+            String sql = "Insert INTO member (username) VALUES (?)";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, member.getName());
+            ps.setString(1, member.getUsername());
             ps.execute();
         }
     }
@@ -21,7 +21,7 @@ public class MemberRepository {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
-            String sql = "SELECT id, name FROM member WHERE id = ?";
+            String sql = "SELECT id, username FROM member WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setLong(1, id);
             ResultSet resultSet = ps.executeQuery();
@@ -34,4 +34,6 @@ public class MemberRepository {
             return null;
         }
     }
+
+
 }

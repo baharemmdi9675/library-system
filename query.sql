@@ -1,7 +1,8 @@
 CREATE TABLE member
 (
-    id   SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL
+    id       SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE NOT NULL
 );
 
-Insert INTO member (name) VALUES ('Ali');
+Insert INTO member (username)
+VALUES ('Ali');
