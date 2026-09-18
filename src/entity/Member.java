@@ -9,6 +9,10 @@ public class Member {
         this.username = username;
     }
 
+    public Member(String username) {
+        this.username = username;
+    }
+
     public Long getId() {
         return id;
     }
