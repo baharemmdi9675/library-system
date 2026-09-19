@@ -60,4 +60,13 @@ public class MemberRepository {
         }
         return null;
     }
+
+    public int deleteMember (String username) throws SQLException{
+        String sql = "DELETE FROM member where username = ?";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1, username);
+            return statement.executeUpdate();
+        }
+    }
 }

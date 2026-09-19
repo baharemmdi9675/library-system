@@ -25,4 +25,14 @@ public class MemberService {
         memberRepository.save(member);
 
     }
+
+    public void deleteMember (String username) throws SQLException {
+        Member fetchedMember = memberRepository.findByUsername(username.toLowerCase());
+        if (fetchedMember!=null){
+            memberRepository.deleteMember(username);
+            return;
+        }
+        System.out.println("Not found");
+    }
+
 }
