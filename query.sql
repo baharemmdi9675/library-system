@@ -6,3 +6,14 @@ CREATE TABLE member
 
 Insert INTO member (username)
 VALUES ('Ali');
+
+
+CREATE TABLE book
+(
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR not null
+
+);
+
+
+
