@@ -78,9 +78,16 @@ public class MemberRepository {
             statement.setString(1,email);
             statement.setString(2,username);
              statement.executeUpdate();
-
-
         }
+    }
 
+    public int countMember () throws SQLException {
+        String sql = "SELECT COUNT (*) FROM member";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+            resultSet.next();
+            return resultSet.getInt(1);
+        }
     }
 }

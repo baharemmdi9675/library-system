@@ -13,6 +13,13 @@ public class Loan {
         this.activeLoan = activeLoan;
     }
 
+    public Loan(Long id, Long userId, Long bookId, Boolean activeLoan) {
+        this.id = id;
+        this.userId = userId;
+        this.bookId = bookId;
+        this.activeLoan = activeLoan;
+    }
+
     public Long getId() {
         return id;
     }
