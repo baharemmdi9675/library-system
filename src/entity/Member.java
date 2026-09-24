@@ -3,10 +3,17 @@ package entity;
 public class Member {
     private Long id;
     private String username;
+    private String email;
 
     public Member(Long id, String username) {
         this.id = id;
         this.username = username;
+    }
+
+    public Member(String username, String email) {
+
+        this.username = username;
+        this.email = email;
     }
 
     public Member(String username) {
@@ -15,6 +22,14 @@ public class Member {
 
     public Long getId() {
         return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public void setId(Long id) {
@@ -33,7 +48,7 @@ public class Member {
     public String toString() {
         return "Member{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", username='" + username + "email " + email + '\'' +
                 '}';
     }
 }

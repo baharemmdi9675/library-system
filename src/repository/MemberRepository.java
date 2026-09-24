@@ -10,9 +10,10 @@ public class MemberRepository {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
-            String sql = "Insert INTO member (username) VALUES (?)";
+            String sql = "Insert INTO member (username,email) VALUES (?,?)";
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, member.getUsername());
+            ps.setString(2, member.getEmail());
             ps.execute();
         }
     }
@@ -61,12 +62,25 @@ public class MemberRepository {
         return null;
     }
 
-    public int deleteMember (String username) throws SQLException{
+    public int deleteMember(String username) throws SQLException {
         String sql = "DELETE FROM member where username = ?";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setString(1, username);
             return statement.executeUpdate();
         }
+    }
+
+    public void updateMember(String username, String email) throws SQLException {
+        String sql = "UPDATE member SET email= ? WHERE username=?";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setString(1,email);
+            statement.setString(2,username);
+             statement.executeUpdate();
+
+
+        }
+
     }
 }

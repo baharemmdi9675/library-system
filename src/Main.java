@@ -19,15 +19,15 @@ public class Main {
 //
 //        memberService.register(username);
 
-        memberService.register("bahar");
+        memberService.register("bahar","bahar@gamil.com");
 //        memberService.register("ali");
-        memberService.deleteMember("ali");
-        memberService.deleteMember("ali");
-        memberService.deleteMember("bahar");
-        LoanRepository loanRepository = new LoanRepository();
-        loanRepository.save(new Loan(1L, 12L, true));
-        MemberLoansDto memberLoansDto = new MemberLoansDto(1L, "bahar", "crime and punishment");
-
+//        memberService.deleteMember("ali");
+//        memberService.deleteMember("ali");
+//        memberService.deleteMember("bahar");
+//        LoanRepository loanRepository = new LoanRepository();
+//        loanRepository.save(new Loan(1L, 12L, true));
+//        MemberLoansDto memberLoansDto = new MemberLoansDto(1L, "bahar", "crime and punishment");
+//
 
     }
 

@@ -1,7 +1,8 @@
 CREATE TABLE member
 (
     id       SERIAL PRIMARY KEY,
-    username VARCHAR(50) UNIQUE NOT NULL
+    username VARCHAR(50) UNIQUE NOT NULL,
+    email    VARCHAR            NOT NULL
 );
 
 Insert INTO member (username)
@@ -22,6 +23,8 @@ CREATE TABLE loan
     book_id     integer not null references book (id),
     active_loan bool    not null
 );
+
+
 
 select m.id, m.username, b.name
 from loan l
