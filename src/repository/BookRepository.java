@@ -1,6 +1,7 @@
 package repository;
 
 import entity.Book;
+import entity.Member;
 import util.ConnectionUtil;
 
 import java.sql.Connection;
@@ -34,6 +35,23 @@ public class BookRepository {
                return new Book(bookId,bookName);
            }
            return null;
+        }
+    }
+
+    public Book findById(Integer id) throws SQLException {
+
+        try (Connection connection = ConnectionUtil.getConnection()) {
+
+            String sql = "SELECT id, name FROM book WHERE id = ?";
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ps.setInt(1, id);
+            ResultSet resultSet = ps.executeQuery();
+            if (resultSet.next()) {
+                Integer fetchedId = resultSet.getInt("id");
+                String name = resultSet.getString("name");
+                return new Book(fetchedId, name);
+            }
+            return null;
         }
     }
 }

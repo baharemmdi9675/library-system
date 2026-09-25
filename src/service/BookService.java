@@ -1,6 +1,7 @@
 package service;
 
 import entity.Book;
+import entity.Member;
 import repository.BookRepository;
 
 import java.sql.SQLException;
@@ -20,5 +21,14 @@ public class BookService {
             System.out.println("book already exits");
         }
 
+    }
+
+    public Book findById(Integer id) {
+        try {
+            bookRepository.findById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return null;
     }
 }

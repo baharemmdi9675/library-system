@@ -15,7 +15,15 @@ public class LoanService {
     }
 
 
-    public Loan findActiveLoanByBookId (Integer bookId) throws SQLException {
-        return loanRepository.findActiveLoanByBookId(bookId);
+    public Loan findActiveLoanByBookId (Integer bookId) {
+        try {
+            return loanRepository.findActiveLoanByBookId(bookId);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void addActiveLoan(Integer bookId, Integer userId) {
+        loanRepository.save(new Loan(userId ,bookId, true));
     }
 }

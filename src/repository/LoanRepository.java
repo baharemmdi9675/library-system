@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class LoanRepository {
-    public void save(Loan loan) throws SQLException {
+    public void save(Loan loan) {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -19,6 +19,8 @@ public class LoanRepository {
             ps.setInt(2, loan.getBookId());
             ps.setBoolean(3, loan.getActiveLoan());
             ps.execute();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
 
