@@ -27,6 +27,8 @@ public class LibraryService {
         if (memberService.countMember()>=capacity){
             throw new LibraryFullException("The library capacity is full");
         }
+
+        memberService.register(member);
     }
 
 }
