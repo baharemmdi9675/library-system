@@ -15,7 +15,7 @@ public class LoanService {
     }
 
 
-    public Loan findActiveLoanByBookId (Integer bookId) {
+    public Loan findActiveLoanByBookId(Integer bookId) {
         try {
             return loanRepository.findActiveLoanByBookId(bookId);
         } catch (SQLException e) {
@@ -24,6 +24,10 @@ public class LoanService {
     }
 
     public void addActiveLoan(Integer bookId, Integer userId) {
-        loanRepository.save(new Loan(userId ,bookId, true));
+        loanRepository.save(new Loan(userId, bookId, true));
+    }
+
+    public void deActiveLoan(Integer id)  {
+        loanRepository.deActiveLoan(id);
     }
 }

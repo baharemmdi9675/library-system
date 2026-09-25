@@ -3,10 +3,7 @@ package service;
 import entity.Book;
 import entity.Loan;
 import entity.Member;
-import exception.BookAlreadyLentException;
-import exception.BookNotFoundException;
-import exception.LibraryFullException;
-import exception.MemberNotFoundException;
+import exception.*;
 
 import java.sql.SQLException;
 
@@ -65,4 +62,11 @@ public class LibraryService {
         loanService.addActiveLoan(bookId, userId);
     }
 
+    public void returnBook(Integer bookId) {
+        Loan fetchedLoan = loanService.findActiveLoanByBookId(bookId);
+        if (fetchedLoan == null) {
+            throw new LoanNotFoundException("No active loan found for the given book");
+        }
+        loanService.deActiveLoan(fetchedLoan.getId());
+    }
 }

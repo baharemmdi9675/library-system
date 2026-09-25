@@ -24,20 +24,33 @@ public class LoanRepository {
         }
     }
 
-    public Loan findActiveLoanByBookId (Integer bookId) throws SQLException {
-        try (Connection connection = ConnectionUtil.getConnection()){
+    public Loan findActiveLoanByBookId(Integer bookId) throws SQLException {
+        try (Connection connection = ConnectionUtil.getConnection()) {
             String sql = "SELECT * FROM loan l WHERE active_loan = true AND book_id =" + bookId;
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet resultSet = ps.executeQuery();
-            if (resultSet.next()){
+            if (resultSet.next()) {
                 Integer id = resultSet.getInt("id");
                 Integer userId = resultSet.getInt("user_id");
                 Integer loanBookId = resultSet.getInt("book_id");
                 Boolean activeLoan = resultSet.getBoolean("active_loan");
-                return new Loan (id, userId, loanBookId, activeLoan);
+                return new Loan(id, userId, loanBookId, activeLoan);
             }
             return null;
         }
     }
 
-}
+    public void deActiveLoan(Integer id) {
+        String sql = "UPDATE loan SET activeloan= ? WHERE id=?";
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setBoolean(1, false);
+            statement.setInt(2, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    }
