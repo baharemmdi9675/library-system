@@ -13,9 +13,11 @@ public class LibraryService {
     private BookService bookService;
     private LoanService loanService;
 
-    public LibraryService(MemberService memberService, int capacity) {
-        this.memberService = memberService;
+    public LibraryService(int capacity, MemberService memberService, BookService bookService, LoanService loanService) {
         this.capacity = capacity;
+        this.memberService = memberService;
+        this.bookService = bookService;
+        this.loanService = loanService;
     }
 
     public void register(Member member) throws SQLException {
