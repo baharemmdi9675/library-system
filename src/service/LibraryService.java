@@ -20,7 +20,7 @@ public class LibraryService {
         this.loanService = loanService;
     }
 
-    public void register(Member member) throws SQLException {
+    public void register(Member member) {
         if (member == null) {
             throw new IllegalArgumentException("Member is null");
         }

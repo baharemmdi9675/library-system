@@ -14,7 +14,7 @@ public class MemberService {
         this.memberRepository = memberRepository;
     }
 
-    public void register(Member member) throws SQLException {
+    public void register(Member member) {
         Member fetchedMember = memberRepository.findByUsername(member.getUsername().toLowerCase());
         if (fetchedMember != null) {
             System.out.println("username already exit");
@@ -51,17 +51,12 @@ public class MemberService {
         throw new MemberNotFoundException("No member found with the given id");
     }
 
-    public int countMember() throws SQLException {
+    public int countMember() {
         return memberRepository.countMember();
     }
 
     public Member findById(Integer id) {
-        try {
-            memberRepository.findById(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
+        return memberRepository.findById(id);
     }
 
 

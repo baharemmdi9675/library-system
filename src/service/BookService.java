@@ -13,22 +13,18 @@ public class BookService {
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-    public void register(Integer id,String name) throws SQLException {
-        Book fetchBook=bookRepository.findByName(name.toLowerCase());
-        if (fetchBook==null){
-            bookRepository.save (new Book(id, name));
-        }else {
+
+    public void register(Integer id, String name) {
+        Book fetchBook = bookRepository.findByName(name.toLowerCase());
+        if (fetchBook == null) {
+            bookRepository.save(new Book(id, name));
+        } else {
             System.out.println("book already exits");
         }
 
     }
 
     public Book findById(Integer id) {
-        try {
-            bookRepository.findById(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return null;
+        return bookRepository.findById(id);
     }
 }

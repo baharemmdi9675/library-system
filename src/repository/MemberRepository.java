@@ -1,12 +1,13 @@
 package repository;
 
 import entity.Member;
+import exception.RepositoryException;
 import util.ConnectionUtil;
 
 import java.sql.*;
 
 public class MemberRepository {
-    public void save(Member member) throws SQLException {
+    public void save(Member member) {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -15,10 +16,12 @@ public class MemberRepository {
             ps.setString(1, member.getUsername());
             ps.setString(2, member.getEmail());
             ps.execute();
+        } catch (SQLException e) {
+            throw new RepositoryException("error", e);
         }
     }
 
-    public Member findById(Integer id) throws SQLException {
+    public Member findById(Integer id) {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -27,10 +30,12 @@ public class MemberRepository {
             ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
             return extractMember(resultSet);
+        } catch (SQLException e) {
+            throw new RepositoryException("error", e);
         }
     }
 
-    public Member findByUsername(String username) throws SQLException {
+    public Member findByUsername(String username) {
 
         String sql = "SELECT id, username from member where username = ?";
 
@@ -39,6 +44,8 @@ public class MemberRepository {
             statement.setString(1, username);
             ResultSet resultSet = statement.executeQuery();
             return extractMember(resultSet);
+        } catch (SQLException e) {
+            throw new RepositoryException("error", e);
         }
 
 
@@ -73,13 +80,15 @@ public class MemberRepository {
         }
     }
 
-    public int countMember () throws SQLException {
+    public int countMember () {
         String sql = "SELECT COUNT (*) FROM member";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
             return resultSet.getInt(1);
+        } catch (SQLException e) {
+            throw new RepositoryException("error", e);
         }
     }
 }

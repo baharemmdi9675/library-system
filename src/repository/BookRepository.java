@@ -2,6 +2,7 @@ package repository;
 
 import entity.Book;
 import entity.Member;
+import exception.RepositoryException;
 import util.ConnectionUtil;
 
 import java.sql.Connection;
@@ -11,7 +12,7 @@ import java.sql.SQLException;
 
 public class BookRepository {
 
-    public void save(Book book) throws SQLException {
+    public void save(Book book) {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -19,10 +20,12 @@ public class BookRepository {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, book.getName());
             ps.execute();
+        } catch (SQLException e) {
+            throw new RepositoryException("error", e);
         }
 
     }
-    public Book findByName(String name) throws SQLException {
+    public Book findByName(String name) {
         try(Connection connection=ConnectionUtil.getConnection()){
             String sql="SELECT name FROM book WHERE name=?";
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -35,10 +38,12 @@ public class BookRepository {
                return new Book(bookId,bookName);
            }
            return null;
+        } catch (SQLException e) {
+            throw new RepositoryException("error", e);
         }
     }
 
-    public Book findById(Integer id) throws SQLException {
+    public Book findById(Integer id) {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
@@ -52,6 +57,8 @@ public class BookRepository {
                 return new Book(fetchedId, name);
             }
             return null;
+        } catch (SQLException e) {
+            throw new RepositoryException("error", e);
         }
     }
 }
