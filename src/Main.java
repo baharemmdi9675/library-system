@@ -19,7 +19,7 @@ public class Main {
 //
 //        memberService.register(username);
 
-        memberService.register("bahar","bahar@gamil.com");
+//        memberService.register("bahar","bahar@gamil.com");
 //        memberService.register("ali");
 //        memberService.deleteMember("ali");
 //        memberService.deleteMember("ali");

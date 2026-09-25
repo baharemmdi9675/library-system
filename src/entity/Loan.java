@@ -1,34 +1,34 @@
 package entity;
 
 public class Loan {
-    private Long id;
-    private Long userId;
-    private Long bookId;
+    private Integer id;
+    private Integer userId;
+    private Integer bookId;
     private Boolean activeLoan;
 
-    public Loan(Long userId, Long bookId, Boolean activeLoan) {
+    public Loan(Integer userId, Integer bookId, Boolean activeLoan) {
         this.id = id;
         this.userId = userId;
         this.bookId = bookId;
         this.activeLoan = activeLoan;
     }
 
-    public Loan(Long id, Long userId, Long bookId, Boolean activeLoan) {
+    public Loan(Integer id, Integer userId, Integer bookId, Boolean activeLoan) {
         this.id = id;
         this.userId = userId;
         this.bookId = bookId;
         this.activeLoan = activeLoan;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public Long getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public Long getBookId() {
+    public Integer getBookId() {
         return bookId;
     }
 
@@ -36,15 +36,15 @@ public class Loan {
         return activeLoan;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public void setUserId(Long userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
-    public void setBookId(Long bookId) {
+    public void setBookId(Integer bookId) {
         this.bookId = bookId;
     }
 

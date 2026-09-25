@@ -12,7 +12,7 @@ public class BookService {
     public BookService(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
     }
-    public void register(Long id,String name) throws SQLException {
+    public void register(Integer id,String name) throws SQLException {
         Book fetchBook=bookRepository.findByName(name.toLowerCase());
         if (fetchBook==null){
             bookRepository.save (new Book(id, name));

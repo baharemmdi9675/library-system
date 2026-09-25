@@ -30,7 +30,7 @@ public class BookRepository {
            if (resultSet.next()){
 
                String bookName=resultSet.getString("name");
-               Long bookId=resultSet.getLong("id");
+               Integer bookId=resultSet.getInt("id");
                return new Book(bookId,bookName);
            }
            return null;

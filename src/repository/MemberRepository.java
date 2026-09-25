@@ -18,23 +18,15 @@ public class MemberRepository {
         }
     }
 
-    public Member findById(Long id) throws SQLException {
+    public Member findById(Integer id) throws SQLException {
 
         try (Connection connection = ConnectionUtil.getConnection()) {
 
             String sql = "SELECT id, username FROM member WHERE id = ?";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setLong(1, id);
+            ps.setInt(1, id);
             ResultSet resultSet = ps.executeQuery();
             return extractMember(resultSet);
-
-//            if (resultSet.next()) {
-//                long memberId = resultSet.getLong("id");
-//                String name = resultSet.getString("name");
-//                return new Member(memberId, name);
-//            }
-//
-//            return null;
         }
     }
 
@@ -55,7 +47,7 @@ public class MemberRepository {
     public Member extractMember(ResultSet rs) throws SQLException {
 
         if (rs.next()) {
-            Long userid = rs.getLong("id");
+            Integer userid = rs.getInt("id");
             String memberUsername = rs.getString("username");
             return new Member(userid, memberUsername);
         }

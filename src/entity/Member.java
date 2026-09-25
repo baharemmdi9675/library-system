@@ -1,11 +1,11 @@
 package entity;
 
 public class Member {
-    private Long id;
+    private Integer id;
     private String username;
     private String email;
 
-    public Member(Long id, String username) {
+    public Member(Integer id, String username) {
         this.id = id;
         this.username = username;
     }
@@ -20,7 +20,7 @@ public class Member {
         this.username = username;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -32,7 +32,7 @@ public class Member {
         this.email = email;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

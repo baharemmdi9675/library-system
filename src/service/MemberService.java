@@ -33,6 +33,15 @@ public class MemberService {
         System.out.println("Not found");
     }
 
+    public void deleteById(int id) throws SQLException {
+        Member fetchedMember = memberRepository.findById(id);
+        if (fetchedMember != null) {
+            memberRepository.deleteMember(fetchedMember.getUsername());
+            return;
+        }
+        throw new MemberNotFoundException("No member found with the given id");
+    }
+
     public void updateMember(String username, String email) throws SQLException {
         Member fechedMember = memberRepository.findByUsername(username.toLowerCase());
         if (fechedMember != null) {
@@ -44,6 +53,14 @@ public class MemberService {
 
     public int countMember() throws SQLException {
         return memberRepository.countMember();
+    }
+
+    public Member findById(Integer id) {
+        try {
+            memberRepository.findById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 

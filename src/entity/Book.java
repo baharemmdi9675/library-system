@@ -2,10 +2,10 @@ package entity;
 
 public class Book {
 
-    private Long id;
+    private Integer id;
     private String name;
 
-    public Book(Long id, String name) {
+    public Book(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
@@ -14,11 +14,11 @@ public class Book {
         this.name = name;
     }
 
-    public Long getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

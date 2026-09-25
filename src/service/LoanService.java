@@ -15,7 +15,7 @@ public class LoanService {
     }
 
 
-    public Loan findActiveLoanByBookId (Long bookId) throws SQLException {
+    public Loan findActiveLoanByBookId (Integer bookId) throws SQLException {
         return loanRepository.findActiveLoanByBookId(bookId);
     }
 }
