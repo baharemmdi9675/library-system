@@ -21,6 +21,20 @@ public class LoanRepository  extends BaseRepository<Loan,Integer>{
         ps.setBoolean(3, loan.getActiveLoan());
     }
 
+    @Override
+    protected String selectQuery() {
+        return "SELECT id, user_id, book_id, active_loan FROM loan WHERE id = ?";
+    }
+
+    @Override
+    protected Loan getPS(ResultSet rs) throws SQLException {
+        Integer id = rs.getInt("id");
+        Integer userId = rs.getInt("user_id");
+        Integer bookId = rs.getInt("book_id");
+        Boolean activeLoan = rs.getBoolean("active_loan");
+        return new Loan(id, userId, bookId, activeLoan);
+    }
+
 //    public void save(Loan loan) {
 //
 //        try (Connection connection = ConnectionUtil.getConnection()) {

@@ -83,14 +83,9 @@ public class Main {
                         return;
                 }
             } catch (RuntimeException e) {
-                System.out.println("Error in main block" + e.getMessage());
+                System.out.println("Error in main block: " + e.getMessage());
             }
         }
-
-//
-//    } catch (RuntimeException e) {
-//        System.out.println("Error in main block" + e.getMessage());
-
     }
 
 }

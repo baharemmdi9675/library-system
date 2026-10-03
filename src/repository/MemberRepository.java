@@ -8,33 +8,16 @@ import java.sql.*;
 
 public class MemberRepository extends BaseRepository<Member,Integer> {
 
-//    public void save(Member member) {
-//
-//
-//        try (Connection connection = ConnectionUtil.getConnection()) {
-//
-//            String sql = "Insert INTO member (username,email) VALUES (?,?)";
-//            PreparedStatement ps = connection.prepareStatement(sql);
-//            ps.setString(1, member.getUsername());
-//            ps.setString(2, member.getEmail());
-//            ps.execute();
-//        } catch (SQLException e) {
-//            throw new RepositoryException("error", e);
-//        }
-//    }
+    @Override
+    protected String selectQuery() {
+        return "SELECT id, username FROM member WHERE id = ?";
+    }
 
-    public Member findById(Integer id) {
-
-        try (Connection connection = ConnectionUtil.getConnection()) {
-
-            String sql = "SELECT id, username FROM member WHERE id = ?";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ResultSet resultSet = ps.executeQuery();
-            return extractMember(resultSet);
-        } catch (SQLException e) {
-            throw new RepositoryException("error", e);
-        }
+    @Override
+    protected Member getPS(ResultSet rs) throws SQLException {
+        Integer userid = rs.getInt("id");
+        String memberUsername = rs.getString("username");
+        return new Member(userid, memberUsername);
     }
 
     public Member findByUsername(String username) {
@@ -47,7 +30,7 @@ public class MemberRepository extends BaseRepository<Member,Integer> {
             ResultSet resultSet = statement.executeQuery();
             return extractMember(resultSet);
         } catch (SQLException e) {
-            throw new RepositoryException("error", e);
+            throw new RepositoryException("Failed to access the dataBase", e);
         }
 
 
