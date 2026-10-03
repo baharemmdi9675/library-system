@@ -35,6 +35,11 @@ public class LoanRepository  extends BaseRepository<Loan,Integer>{
         return new Loan(id, userId, bookId, activeLoan);
     }
 
+    @Override
+    protected String deleteQuery() {
+        return "DELETE FROM loan where username = ?";
+    }
+
 //    public void save(Loan loan) {
 //
 //        try (Connection connection = ConnectionUtil.getConnection()) {
@@ -67,7 +72,7 @@ public class LoanRepository  extends BaseRepository<Loan,Integer>{
     }
 
     public void deActiveLoan(Integer id) {
-        String sql = "UPDATE loan SET activeloan= ? WHERE id=?";
+        String sql = "UPDATE loan SET active_loan= ? WHERE id=?";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
             statement.setBoolean(1, false);

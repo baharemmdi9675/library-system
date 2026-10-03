@@ -84,4 +84,9 @@ public Book findByName(String name) {
         String name = rs.getString("name");
         return new Book(fetchedId, name);
     }
+
+    @Override
+    protected String deleteQuery() {
+        return "DELETE FROM book where id = ?";
+    }
 }

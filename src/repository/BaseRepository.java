@@ -66,6 +66,17 @@ public abstract class BaseRepository<T, ID> {
 //        return null;
 //    }
 
+
+    public int deleteById (int id) throws SQLException {
+        try (Connection connection = ConnectionUtil.getConnection()) {
+            String sql = deleteQuery();
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, id);
+            return statement.executeUpdate();
+        }
+    }
+
+    protected abstract String deleteQuery();
 }
 
 

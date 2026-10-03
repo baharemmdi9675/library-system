@@ -20,6 +20,11 @@ public class MemberRepository extends BaseRepository<Member,Integer> {
         return new Member(userid, memberUsername);
     }
 
+    @Override
+    protected String deleteQuery() {
+        return "DELETE FROM member where id = ?";
+    }
+
     public Member findByUsername(String username) {
 
         String sql = "SELECT id, username from member where username = ?";
