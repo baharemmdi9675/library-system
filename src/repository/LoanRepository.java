@@ -8,21 +8,33 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class LoanRepository {
-    public void save(Loan loan) {
-
-        try (Connection connection = ConnectionUtil.getConnection()) {
-
-            String sql = "Insert INTO loan (user_id, book_id, active_loan)  VALUES (?, ?, ?)";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, loan.getUserId());
-            ps.setInt(2, loan.getBookId());
-            ps.setBoolean(3, loan.getActiveLoan());
-            ps.execute();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+public class LoanRepository  extends BaseRepository<Loan,Integer>{
+    @Override
+    protected String insertQuery() {
+        return "Insert INTO loan (user_id, book_id, active_loan)  VALUES (?, ?, ?)";
     }
+
+    @Override
+    protected void setPS(Loan loan, PreparedStatement ps) throws SQLException {
+        ps.setInt(1, loan.getUserId());
+        ps.setInt(2, loan.getBookId());
+        ps.setBoolean(3, loan.getActiveLoan());
+    }
+
+//    public void save(Loan loan) {
+//
+//        try (Connection connection = ConnectionUtil.getConnection()) {
+//
+//            String sql = "Insert INTO loan (user_id, book_id, active_loan)  VALUES (?, ?, ?)";
+//            PreparedStatement ps = connection.prepareStatement(sql);
+//            ps.setInt(1, loan.getUserId());
+//            ps.setInt(2, loan.getBookId());
+//            ps.setBoolean(3, loan.getActiveLoan());
+//            ps.execute();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     public Loan findActiveLoanByBookId(Integer bookId) throws SQLException {
         try (Connection connection = ConnectionUtil.getConnection()) {

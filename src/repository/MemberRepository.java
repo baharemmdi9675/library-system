@@ -6,20 +6,22 @@ import util.ConnectionUtil;
 
 import java.sql.*;
 
-public class MemberRepository {
-    public void save(Member member) {
+public class MemberRepository extends BaseRepository<Member,Integer> {
 
-        try (Connection connection = ConnectionUtil.getConnection()) {
-
-            String sql = "Insert INTO member (username,email) VALUES (?,?)";
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, member.getUsername());
-            ps.setString(2, member.getEmail());
-            ps.execute();
-        } catch (SQLException e) {
-            throw new RepositoryException("error", e);
-        }
-    }
+//    public void save(Member member) {
+//
+//
+//        try (Connection connection = ConnectionUtil.getConnection()) {
+//
+//            String sql = "Insert INTO member (username,email) VALUES (?,?)";
+//            PreparedStatement ps = connection.prepareStatement(sql);
+//            ps.setString(1, member.getUsername());
+//            ps.setString(2, member.getEmail());
+//            ps.execute();
+//        } catch (SQLException e) {
+//            throw new RepositoryException("error", e);
+//        }
+//    }
 
     public Member findById(Integer id) {
 
@@ -74,13 +76,13 @@ public class MemberRepository {
         String sql = "UPDATE member SET email= ? WHERE username=?";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1,email);
-            statement.setString(2,username);
-             statement.executeUpdate();
+            statement.setString(1, email);
+            statement.setString(2, username);
+            statement.executeUpdate();
         }
     }
 
-    public int countMember () {
+    public int countMember() {
         String sql = "SELECT COUNT (*) FROM member";
         try (Connection connection = ConnectionUtil.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -90,5 +92,17 @@ public class MemberRepository {
         } catch (SQLException e) {
             throw new RepositoryException("error", e);
         }
+    }
+
+    @Override
+    protected String insertQuery() {
+        return "Insert INTO member (username,email) VALUES (?,?)";
+    }
+
+
+    @Override
+    protected void setPS(Member member, PreparedStatement ps) throws SQLException {
+        ps.setString(1, member.getUsername());
+        ps.setString(2, member.getEmail());
     }
 }
